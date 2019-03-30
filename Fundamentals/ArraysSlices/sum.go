@@ -19,3 +19,19 @@ func sumAll(numbersList ...[]int) []int {
 
 	return sums
 }
+
+func sumAllTails(numbersList ...[]int) []int {
+	nSlices := len(numbersList)
+	sums := make([]int, nSlices)
+
+	for i, numbers := range numbersList {
+		if len(numbers) == 0 {
+			sums[i] = 0
+		} else {
+			tail := numbers[1:]
+			sums[i] = sum(tail)
+		}
+	}
+
+	return sums
+}
