@@ -8,7 +8,7 @@ import (
 
 func TestSum(t *testing.T) {
 
-	assertCorrectMessage := func(t *testing.T, got, want int) {
+	checkSum := func(t *testing.T, got, want int) {
 		t.Helper()
 
 		// Assert the message
@@ -24,7 +24,7 @@ func TestSum(t *testing.T) {
 		got := sum(numbers)
 		want := 15
 
-		assertCorrectMessage(t, got, want)
+		checkSum(t, got, want)
 	})
 
 	t.Run("collection with negative numbers", func(t *testing.T) {
@@ -32,13 +32,13 @@ func TestSum(t *testing.T) {
 		got := sum(numbers)
 		want := 1
 
-		assertCorrectMessage(t, got, want)
+		checkSum(t, got, want)
 	})
 }
 
 func TestSumAll(t *testing.T) {
 
-	assertCorrectMessage := func(t *testing.T, got []int, want []int) {
+	checkSum := func(t *testing.T, got []int, want []int) {
 		t.Helper()
 
 		// Assert the message
@@ -57,6 +57,6 @@ func TestSumAll(t *testing.T) {
 		got := sumAll(numbers, numbers2, numbers3)
 		want := []int{15, 30, 35}
 
-		assertCorrectMessage(t, got, want)
+		checkSum(t, got, want)
 	})
 }
