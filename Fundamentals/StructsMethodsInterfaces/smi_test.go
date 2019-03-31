@@ -55,47 +55,26 @@ func TestArea(t *testing.T) {
 		}
 	}
 
-	// Rectangles
+	// Table Tests, insert new ones here
+	areaTests := []struct {
+		name    string
+		shape   Shape
+		hasArea float64
+	}{
+		// Rectangle
+		{name: "Rectangle", shape: Rectangle{width: 12.0, height: 6.0}, hasArea: 72.0},
+		{name: "Rectangle with zero width", shape: Rectangle{width: (-12.0), height: 6.0}, hasArea: 0.0},
+		// Circle
+		{name: "Circle", shape: Circle{radius: 10.0}, hasArea: 314.1592653589793},
+		{name: "Circle with zero radius", shape: Circle{radius: 0.0}, hasArea: 0.0},
+		// Triangle
+		// {name: "Triangle", shape: Triangle{Base: 12.0, Height: 6.0}, hasArea: 36.0},
+		// {name: "Triangle with zero base", shape: Triangle{Base: 0.0, Height: 6.0}, hasArea: 0.0},
+	}
 
-	t.Run("area of a rectangle", func(t *testing.T) {
-		width := 20.0
-		height := 10.0
-
-		rectangle := Rectangle{width, height}
-
-		want := 200.0
-
-		checkArea(t, rectangle, want)
-	})
-
-	t.Run("negative values of a rectangle give zero area", func(t *testing.T) {
-		width := (-20.0)
-		height := 10.0
-
-		rectangle := Rectangle{width, height}
-		want := 0.0
-
-		checkArea(t, rectangle, want)
-	})
-
-	// Circles
-
-	t.Run("area of a circle", func(t *testing.T) {
-		radius := 10.0
-
-		circle := Circle{radius}
-		want := 314.1592653589793
-
-		checkArea(t, circle, want)
-	})
-
-	t.Run("negative radius of a circle give zero area", func(t *testing.T) {
-		radius := (-10.0)
-
-		circle := Circle{radius}
-		want := 0.0
-
-		checkArea(t, circle, want)
-	})
-
+	for _, test := range areaTests {
+		t.Run(test.name, func(t *testing.T) {
+			checkArea(t, test.shape, test.hasArea)
+		})
+	}
 }
