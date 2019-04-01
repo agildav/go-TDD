@@ -29,7 +29,7 @@ func TestPerimeter(t *testing.T) {
 		checkPerimeter(t, got, want)
 	})
 
-	t.Run("negative values of a rectangle give zero perimeter", func(t *testing.T) {
+	t.Run("zero values of a rectangle give zero perimeter", func(t *testing.T) {
 		width := (-20.0)
 		height := 10.0
 
@@ -63,13 +63,16 @@ func TestArea(t *testing.T) {
 	}{
 		// Rectangle
 		{name: "Rectangle", shape: Rectangle{width: 12.0, height: 6.0}, hasArea: 72.0},
-		{name: "Rectangle with zero width", shape: Rectangle{width: (-12.0), height: 6.0}, hasArea: 0.0},
+		{name: "Rectangle with negative width", shape: Rectangle{width: (-12.0), height: 6.0}, hasArea: 0.0},
+		{name: "Rectangle with zero width", shape: Rectangle{width: (0.0), height: 6.0}, hasArea: 0.0},
 		// Circle
 		{name: "Circle", shape: Circle{radius: 10.0}, hasArea: 314.1592653589793},
+		{name: "Circle with negative width", shape: Circle{radius: (-10.0)}, hasArea: 0.0},
 		{name: "Circle with zero radius", shape: Circle{radius: 0.0}, hasArea: 0.0},
 		// Triangle
-		// {name: "Triangle", shape: Triangle{Base: 12.0, Height: 6.0}, hasArea: 36.0},
-		// {name: "Triangle with zero base", shape: Triangle{Base: 0.0, Height: 6.0}, hasArea: 0.0},
+		{name: "Triangle", shape: Triangle{base: 12.0, height: 6.0}, hasArea: 36.0},
+		{name: "Triangle with negative base", shape: Triangle{base: (-12.0), height: 6.0}, hasArea: 0.0},
+		{name: "Triangle with zero base", shape: Triangle{base: 0.0, height: 6.0}, hasArea: 0.0},
 	}
 
 	for _, test := range areaTests {
