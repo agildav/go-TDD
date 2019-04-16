@@ -2,8 +2,18 @@ package pointers
 
 import "fmt"
 
-func (w *Wallet) Balance() Bitcoin {
-	return w.balance
+type Bitcoin float64
+
+type Wallet struct {
+	balance Bitcoin
+}
+
+// // // // // // // // // // // // // // // // // // // //
+
+func (w *Wallet) Withdraw(amount Bitcoin) {
+	if amount >= 0 {
+		w.balance -= amount
+	}
 }
 
 func (w *Wallet) Deposit(amount Bitcoin) {
@@ -12,15 +22,11 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 	}
 }
 
-// // // // // // // // // //
-
-type Bitcoin float64
-
-type Wallet struct {
-	balance Bitcoin
+func (w *Wallet) Balance() Bitcoin {
+	return w.balance
 }
 
-// // // // // // // // // //
+// // // // // // // // // // // // // // // // // // // //
 
 type Stringer interface {
 	String() string
