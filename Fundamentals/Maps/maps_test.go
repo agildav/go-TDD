@@ -21,6 +21,21 @@ func TestSearch(t *testing.T) {
 	})
 }
 
+func TestAdd(t *testing.T) {
+	d := Dictionary{}
+	t.Run("add a word", func(t *testing.T) {
+		d.Add("test", "dictionary test string")
+		got, err := d.Search("test")
+		want := "dictionary test string"
+
+		if err != nil {
+			t.Fatal("error adding word,", err)
+		}
+
+		assertStrings(t, got, want)
+	})
+}
+
 // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 // Helpers

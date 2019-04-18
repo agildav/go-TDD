@@ -9,7 +9,7 @@ type Dictionary map[string]string
 // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 // Dictionary Errors
-var errWordNotFound = errors.New("could not find word, does not exist")
+var errWordNotFound = errors.New("could not find word, it does not exist")
 
 // // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -21,4 +21,8 @@ func (d Dictionary) Search(word string) (string, error) {
 	}
 
 	return definition, nil
+}
+
+func (d Dictionary) Add(key, word string) {
+	d[key] = word
 }
