@@ -22,7 +22,7 @@ func TestSearch(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	d := Dictionary{}
+	d := Dictionary{"key": "word"}
 	t.Run("add a word", func(t *testing.T) {
 		d.Add("test", "dictionary test string")
 		got, err := d.Search("test")
@@ -33,6 +33,16 @@ func TestAdd(t *testing.T) {
 		}
 
 		assertStrings(t, got, want)
+	})
+
+	t.Run("should not add a word that already exists", func(t *testing.T) {
+		err := d.Add("key", "new word test")
+		want := errWordExists
+
+		if err != nil {
+			assertError(t, err, want)
+		}
+
 	})
 }
 
