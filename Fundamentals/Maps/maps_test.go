@@ -42,7 +42,29 @@ func TestAdd(t *testing.T) {
 		if err != nil {
 			assertError(t, err, want)
 		}
+	})
+}
 
+func TestUpdate(t *testing.T) {
+	d := Dictionary{"key": "word"}
+	t.Run("update a word", func(t *testing.T) {
+		err := d.Update("key", "dictionary update test string")
+		want := "dictionary update test string"
+
+		if err != nil {
+			t.Fatal("error updating word,", err)
+		}
+		got, _ := d.Search("key")
+		assertStrings(t, got, want)
+	})
+
+	t.Run("should not update a word that does not exist", func(t *testing.T) {
+		err := d.Update("unknown", "new word test")
+		want := errWordDoesNotExist
+
+		if err != nil {
+			assertError(t, err, want)
+		}
 	})
 }
 
