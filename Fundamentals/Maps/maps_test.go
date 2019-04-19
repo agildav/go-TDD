@@ -60,11 +60,30 @@ func TestUpdate(t *testing.T) {
 
 	t.Run("should not update a word that does not exist", func(t *testing.T) {
 		err := d.Update("unknown", "new word test")
-		want := errWordDoesNotExist
+		want := errUpdWordDoesNotExist
 
 		if err != nil {
 			assertError(t, err, want)
 		}
+	})
+}
+
+func TestDelete(t *testing.T) {
+	d := Dictionary{"key": "word"}
+	t.Run("delete a word", func(t *testing.T) {
+		d.Delete("key")
+
+		_, err := d.Search("key")
+		want := errWordNotFound
+		assertError(t, err, want)
+	})
+
+	t.Run("delete a word that does not exist", func(t *testing.T) {
+		d.Delete("newKey")
+
+		_, err := d.Search("newKey")
+		want := errWordNotFound
+		assertError(t, err, want)
 	})
 }
 

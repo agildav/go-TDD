@@ -8,9 +8,10 @@ type Dictionary map[string]string
 type DictionaryErr string
 
 const (
-	errWordNotFound     = DictionaryErr("could not find word, it does not exist")
-	errWordExists       = DictionaryErr("could not add word, it already exists")
-	errWordDoesNotExist = DictionaryErr("could not update word, it does not exist")
+	errWordNotFound        = DictionaryErr("could not find word because it does not exist")
+	errWordExists          = DictionaryErr("could not add word because it already exists")
+	errUpdWordDoesNotExist = DictionaryErr("could not update word because it does not exist")
+	errDelWordDoesNotExist = DictionaryErr("could not delete word because it does not exist")
 )
 
 func (err DictionaryErr) Error() string {
@@ -49,11 +50,15 @@ func (d Dictionary) Update(key, word string) error {
 
 	switch err {
 	case errWordNotFound:
-		return errWordDoesNotExist
+		return errUpdWordDoesNotExist
 	case nil:
 		d[key] = word
 	default:
 		return err
 	}
 	return nil
+}
+
+func (d Dictionary) Delete(key string) {
+	delete(d, key)
 }
