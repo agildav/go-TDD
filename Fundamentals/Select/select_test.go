@@ -11,7 +11,7 @@ import (
 func TestRacer(t *testing.T) {
 	// Deposit
 	t.Run("return the fastest URL check", func(t *testing.T) {
-		slowServer := makeTestServer(20 * time.Millisecond)
+		slowServer := makeTestServer(30 * time.Millisecond)
 		fastServer := makeTestServer(0 * time.Millisecond)
 
 		// Close the servers
